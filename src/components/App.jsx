@@ -1,15 +1,20 @@
+import { Alert } from './Alert';
+
 export const App = () => {
   return (
-    <p
-      style={{
-        margin: 8,
-        padding: '12px 16px',
-        borderRadius: 4,
-        backgroundColor: 'gray',
-        color: 'white',
-      }}
-    >
-      Please update your email!
-    </p>
+    <>
+      <Alert variant="info">
+        Would you like to browse our recommended products?
+      </Alert>
+      <Alert variant="error">There was an error during transaction!</Alert>
+      <Alert variant="success">
+        Payment received, thank you for your purchase!
+      </Alert>
+      <Alert variant="warning">
+        Please update your profile contact information
+      </Alert>
+    </>
   );
 };
+
+export default App;
