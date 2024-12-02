@@ -1,4 +1,8 @@
 // import CustomButton from './CustomButton';
+// import ClickCounter from './ClickCounter';
+
+import { useState } from 'react';
+
 // const App = () => {
 //   return (
 //     <>
@@ -7,8 +11,6 @@
 //     </>
 //   );
 // };
-
-// import { useState } from 'react';
 
 // const App = () => {
 //   const [clicks, setClicks] = useState(0);
@@ -30,13 +32,32 @@
 //     </>
 //   );
 // };
-import ClickCounter from './ClickCounter';
+
+// const App = () => {
+//   return (
+//     <>
+//       <ClickCounter />
+//       <ClickCounter />
+//     </>
+//   );
+// };
+const ClickCounter = ({ value, onUpdate }) => {
+  return <button onClick={onUpdate}>Current: {value}</button>;
+};
 
 const App = () => {
+  const [clicks, setClicks] = useState(0);
+
+  // Функція, яку будемо передавати в ClickCounter
+  // для виклику під час кліку
+  const handleClick = () => {
+    setClicks(clicks + 1);
+  };
+
   return (
     <>
-      <ClickCounter />
-      <ClickCounter />
+      <ClickCounter value={clicks} onUpdate={handleClick} />
+      <ClickCounter value={clicks} onUpdate={handleClick} />
     </>
   );
 };
