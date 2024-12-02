@@ -1,18 +1,32 @@
-import { Alert } from './Alert';
+// import CustomButton from './CustomButton';
+// const App = () => {
+//   return (
+//     <>
+//       <CustomButton message="Playing music!">Play some music</CustomButton>
+//       <CustomButton message="Uploading your data!">Upload data</CustomButton>
+//     </>
+//   );
+// };
 
-export const App = () => {
+import { useState } from 'react';
+
+const App = () => {
+  const [clicks, setClicks] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    setClicks(clicks + 1);
+  };
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
-      <Alert variant="info">
-        Would you like to browse our recommended products?
-      </Alert>
-      <Alert variant="error">There was an error during transaction!</Alert>
-      <Alert variant="success">
-        Payment received, thank you for your purchase!
-      </Alert>
-      <Alert variant="warning">
-        Please update your profile contact information
-      </Alert>
+      <button onClick={handleClick}>Current: {clicks}</button>
+      <button onClick={handleToggle}>{isOpen ? 'Hide' : 'Show'}</button>
+      {isOpen && <p>Now you can see me!</p>}
     </>
   );
 };
