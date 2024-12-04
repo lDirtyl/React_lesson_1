@@ -31,9 +31,15 @@ import { useState, useEffect } from 'react';
 
 const Modal = () => {
   useEffect(() => {
-    setInterval(() => {
+    // Зберігаємо ідентифікатор інтервалу в змінну
+    const intervalId = setInterval(() => {
       console.log(`Interval - ${Date.now()}`);
     }, 2000);
+
+    return () => {
+      // Очищаємо інтервал за його ідентифікатором
+      clearInterval(intervalId);
+    };
   }, []);
 
   return <div>Modal</div>;
@@ -51,4 +57,5 @@ const App = () => {
     </div>
   );
 };
+
 export default App;
