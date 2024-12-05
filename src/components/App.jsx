@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 //
-// ============ Життєвий цикл компонента ========= Хук useEffect ============= Етап монтуванн я================
+// ============ Життєвий цикл компонента ========= Хук useEffect ============= Етап монтування ================
 
 // const App = () => {
 //   const [clicks, setClicks] = useState(0);
@@ -26,35 +26,104 @@ import { useState, useEffect } from 'react';
 // };
 
 //
-// =========================Етап розмонтування========================================
+// ========================= Етап розмонтування ========================================
 //
 
-const Modal = () => {
-  useEffect(() => {
-    // Зберігаємо ідентифікатор інтервалу в змінну
-    const intervalId = setInterval(() => {
-      console.log(`Interval - ${Date.now()}`);
-    }, 2000);
+// const Modal = () => {
+//   useEffect(() => {
+//     // Зберігаємо ідентифікатор інтервалу в змінну
+//     const intervalId = setInterval(() => {
+//       console.log(`Interval - ${Date.now()}`);
+//     }, 2000);
 
-    return () => {
-      // Очищаємо інтервал за його ідентифікатором
-      clearInterval(intervalId);
-    };
-  }, []);
+//     return () => {
+//       // Очищаємо інтервал за його ідентифікатором
+//       clearInterval(intervalId);
+//     };
+//   }, []);
 
-  return <div>Modal</div>;
-};
+//   return <div>Modal</div>;
+// };
+
+// const App = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   return (
+//     <div>
+//       <button onClick={() => setIsOpen(!isOpen)}>
+//         {isOpen ? 'Close' : 'Open'}
+//       </button>
+//       {isOpen && <Modal />}
+//     </div>
+//   );
+// };
+
+//
+// ============================= Етап оновлення ====================================
+//
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+//   // ✅ Залежності вказані правильно
+//   useEffect(() => {
+//     console.log('Clicks updated: ', clicks);
+//   }, [clicks]);
+
+//   return (
+//     <button onClick={() => setClicks(clicks + 1)}>
+//       You clicked {clicks} times
+//     </button>
+//   );
+// };
+
+//
+// ============================== Декілька ефектів ===================================
+//
+
+// const App = () => {
+//   const [clicks, setClicks] = useState(0);
+
+//   useEffect(() => {
+//     console.log('You can see me only once!');
+//   }, []);
+
+//   useEffect(() => {
+//     console.log('Clicks updated: ', clicks);
+//   }, [clicks]);
+
+//   useEffect(() => {
+//     document.title = `You clicked ${clicks} times`;
+//   });
+
+//   return (
+//     <button onClick={() => setClicks(clicks + 1)}>
+//       You clicked {clicks} times
+//     </button>
+//   );
+// };
 
 const App = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [first, setFirst] = useState(0);
+  const [second, setSecond] = useState(0);
+
+  useEffect(() => {
+    console.log('First updated: ', first);
+  }, [first]);
+
+  useEffect(() => {
+    console.log('Second updated: ', second);
+  }, [second]);
+
+  useEffect(() => {
+    console.log('First or second updated: ', first + second);
+  }, [first, second]);
 
   return (
-    <div>
-      <button onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? 'Close' : 'Open'}
-      </button>
-      {isOpen && <Modal />}
-    </div>
+    <>
+      <button onClick={() => setFirst(first + 1)}>First: {first}</button>
+      <button onClick={() => setSecond(second + 1)}>Second: {second}</button>
+    </>
   );
 };
 
