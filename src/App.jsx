@@ -1,17 +1,38 @@
-import LoginForm from './components/LoginForm/LoginForm.jsx';
+
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import ArticleList from './components/ArticleList/ArticleList';
+import { fetchArticlesWithTopic } from "./articles-api.js";
+import SearchForm from './components/SearchForm/SearchForm.jsx';
+import Loader from './components/Loader/Loader.jsx';
+import Error from './components/Error/Error.jsx';
 
 const App = () => {
-  // Колбек-функція для обробки сабміту форми
-  const handleLogin = userData => {
-    // Виконуємо необхідні операції з даними
-    console.log(userData);
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleSearch = async (topic) => {
+    try {
+	  setArticles([]);
+	  setError(false);
+      setLoading(true);
+      const data = await fetchArticlesWithTopic(topic);
+      setArticles(data);
+    } catch (error)
+     {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div>
-      <h1>Please login to your account!</h1>
-      {/* Передаємо колбек як пропс форми */}
-      <LoginForm onLogin={handleLogin} />
+      <SearchForm onSearch={handleSearch} />
+      {loading && <Loader />}
+      {error && <Error />}
+      {articles.length > 0 && <ArticleList items={articles} />}
     </div>
   );
 };
