@@ -1,11 +1,10 @@
 
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import ArticleList from './components/ArticleList/ArticleList';
 import { fetchArticlesWithTopic } from "./articles-api.js";
 import SearchForm from './components/SearchForm/SearchForm.jsx';
 import Loader from './components/Loader/Loader.jsx';
 import Error from './components/Error/Error.jsx';
+import { useState } from 'react';
 
 const App = () => {
   const [articles, setArticles] = useState([]);
